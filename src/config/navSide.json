@@ -1,0 +1,35 @@
+[{
+  "menuName": "导航一",
+  "icon": "el-icon-location",
+  "pathId": "1",
+  "menuArray": [
+    {
+      "name": "表单元素",
+      "path": "form"
+    },
+    {
+      "name": "表格元素",
+      "path": "table"
+    }
+  ]
+}, {
+  "menuName": "导航二",
+  "icon": "el-icon-menu",
+  "pathId": "2",
+  "menuArray": [
+    {
+      "name": "通知类",
+      "path": "notice"
+    }
+  ]
+}, {
+  "menuName": "导航三",
+  "icon": "el-icon-setting",
+  "pathId": "3",
+  "menuArray": [
+    {
+      "name": "其他",
+      "path": "other"
+    }
+  ]
+}]

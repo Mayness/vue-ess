@@ -1,0 +1,24 @@
+@import 'color';
+// 整个页面公共样式
+.contentBox_title{
+  font-weight: 400;
+  color: #1f2f3d;
+  font-size: 24px;
+  margin-left: 10px
+}
+.contentBox_item{
+  border: 1px solid #ebebeb;
+  border-radius: 3px;
+  margin: 10px 5px 10px 0;
+  padding: 10px 15px;
+}
+// tag 副标题颜色
+.el-tag{
+  color: $mColor;
+  border: {
+    color: $mColor
+  }
+}
+.contentBox_Content{
+  margin: 10px 0 30px;
+}
