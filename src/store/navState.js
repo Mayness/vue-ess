@@ -5,12 +5,12 @@ Vue.use(Vuex)
 // 数据状态
 const state = {
   // 当前展示的选项卡
-  editableTabsValue: {str: '1'},
+  editableTabsValue: {str: 'top_index'},
   editableTabs: [{
-    title: '首页',        // tab栏标题
-    name: '1',           // tab栏类似id
-    path: '/',           // tab 路径
-    close: true          // 是否允许关闭
+    title: '首页',          // tab栏标题
+    name: 'top_index',           // tab栏类似id
+    path: '/',              // tab 路径
+    close: true             // 是否允许关闭
   }],
   activeTab: {path: null},
   sideNavWidth: '200px'
@@ -20,38 +20,39 @@ const mutations = {
   // 增加(原始值，传递值)   同步修改
   addNavTab (state, value) {
     new Promise((resolve) => {
-      let sameTab = null
+      let sameTabId = null
       for (let i of state.editableTabs) {
-        if (i.path === value.path) {
-          sameTab = i.name
+        if (i.name === value.id) {
+          sameTabId = i.name
           break
         }
       }
-      resolve(sameTab)
+      resolve(sameTabId)
     })
     // 判断是否选项卡中已经有了当前选中的内容路径
-    .then((judge) => {
-      if (judge === null) {
-        let navLength = state.editableTabs.length
-        let newTabName = ++navLength + ''
+    .then((id) => {
+      if (id === null) {
         state.editableTabs.push({
           title: value.name,
-          name: newTabName,
+          name: value.id,
           path: value.path
         })
-        state.editableTabsValue.str = newTabName
+        state.editableTabsValue.str = value.id
       } else {
-        state.editableTabsValue.str = judge
+        state.editableTabsValue.str = id
       }
+      state.activeTab.path = value.path
     })
   },
   // 修改当前tab
   changeTab (state, targetName) {
     let tabs = state.editableTabs
     let activeName = state.editableTabsValue.str
-    state.activeTab.path = state.editableTabs[0].path
+    state.activeTab.path = state.activeTab.path || state.editableTabs[0].path
+    // 如果当前删除的选项卡 是 当前展示的这个选项卡
     if (activeName === targetName) {
       tabs.forEach((tab, index) => {
+        // 找到当前这个选项卡
         if (tab.name === targetName) {
           let nextTab = tabs[index + 1] || tabs[index - 1]
           if (nextTab) {
@@ -62,6 +63,7 @@ const mutations = {
       })
     }
     state.editableTabsValue.str = activeName
+    // 删除选项组中的元素
     state.editableTabs = tabs.filter(tab => tab.name !== targetName)
   },
   // 侧边栏是否收缩

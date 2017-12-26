@@ -16,7 +16,7 @@ const router = new Router({
   ],
   mode: 'history'
 })
-router.afterEach((to, from, next) => {
-  console.log(to, from)
-})
+// router.afterEach((to, from, next) => {
+//   console.log(to, from)
+// })
 export default router

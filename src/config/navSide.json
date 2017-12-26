@@ -5,10 +5,12 @@
   "menuArray": [
     {
       "name": "表单元素",
+      "id": "top_form",
       "path": "form"
     },
     {
       "name": "表格元素",
+      "id": "top_table",
       "path": "table"
     }
   ]
@@ -19,6 +21,7 @@
   "menuArray": [
     {
       "name": "通知类",
+      "id": "top_notice",
       "path": "notice"
     }
   ]
@@ -29,6 +32,7 @@
   "menuArray": [
     {
       "name": "其他",
+      "id": "top_other",
       "path": "other"
     }
   ]

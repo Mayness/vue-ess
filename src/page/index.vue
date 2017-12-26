@@ -11,8 +11,8 @@
         <el-main>
           <el-tabs v-if="editableTabsValue.str" v-model="editableTabsValue.str" type="card" @tab-remove="removeTab" @tab-click="clickTab">
             <el-tab-pane
-              v-for="(item) in editableTabs"
-              :key="item.name"
+              v-for="(item, index) in editableTabs"
+              :key="index"
               :label="item.title"
               :name="item.name"
               :closable="!item.close"
@@ -52,8 +52,8 @@
       // 进入页面默认跳入active选项卡路径
       await this.sleep_getActiveTab()
       this.$router.push(this.activeTab.path)
-
-      this.$http.get('api/v1/topics').then((res) => {
+      console.log('请求结果：')
+      this.$http.get('/api/auth/login_old').then((res) => {
         console.log(res)
       })
     },
