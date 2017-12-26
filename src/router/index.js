@@ -13,7 +13,8 @@ const router = new Router({
       component: Index,
       children
     }
-  ]
+  ],
+  mode: 'history'
 })
 router.afterEach((to, from, next) => {
   console.log(to, from)

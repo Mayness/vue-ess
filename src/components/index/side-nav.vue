@@ -26,6 +26,8 @@
 
 <style scope lang='scss'>
   @import '../../style/base/color';
+  @import '../../asserts/icon/iconfont.css';
+
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     position: absolute;
     width: 200px;

@@ -10,16 +10,19 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/api': {
-      //   target: '',   // 接口域名
-      //   secure: true,      // 是否跨域 
-      //   changeOrigin: true // 如果是https接口，需要配置这个参数
-      // }
+      '/api/v1': {              // 相当于 {target}/api/v1
+        target: 'https://cnodejs.org',   // 接口域名
+        secure: true,      // 是否跨域 
+        changeOrigin: true // 如果是https接口，需要配置这个参数
+        // ,pathRewriter: {
+        //   '/api': '/api'    // 可以使用 /api 等价于 {target}/api
+        // }
+      }
     },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8888, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
@@ -56,12 +59,16 @@ module.exports = {
 
   build: {
     // Template for index.html
+    // 绝对路径：入口文件
     index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
+    // 绝对路径：目录
     assetsRoot: path.resolve(__dirname, '../dist'),
+    // 静态资源的根目录的子目录static, 也就是dist目录下的static
     assetsSubDirectory: 'static',
-    assetsPublicPath: '',
+    // 静态资源的公开路径：资源的根目录
+    assetsPublicPath: '/',
 
     /**
      * Source Maps

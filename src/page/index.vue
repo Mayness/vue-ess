@@ -52,6 +52,10 @@
       // 进入页面默认跳入active选项卡路径
       await this.sleep_getActiveTab()
       this.$router.push(this.activeTab.path)
+
+      this.$http.get('api/v1/topics').then((res) => {
+        console.log(res)
+      })
     },
     methods: {
       // 防止内容栏高度溢出
@@ -102,5 +106,4 @@
 .el-main{
   padding: 5px;
 }
-
 </style>
