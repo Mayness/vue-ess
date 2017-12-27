@@ -1,16 +1,10 @@
 <template>
   <div>
-    <h2 class="contentBox_title">表格</h2>
+    <h2 class="contentBox_title" @click="refresh()">表格</h2>
     <div class="contentBox_item">
       <TableTemple/>
       <Tag/>
-      <el-tag>进度条</el-tag>
-      <div class="contentBox_Content" style="width: 400px">
-        <el-progress :percentage="0"></el-progress>
-        <el-progress :percentage="70"></el-progress>
-        <el-progress :percentage="100" status="success"></el-progress>
-        <el-progress :percentage="50" status="exception"></el-progress>
-      </div>
+      <Progress/>
       <Tree/>
       <Page/>
       <Badge/>
@@ -24,11 +18,18 @@
   import Tree from '@/components/table/tree'
   import Page from '@/components/table/page'
   import Badge from '@/components/table/badge'
+  import Progress from '@/components/table/progress'
   export default {
     data () {
       return {}
     },
-    components: {TableTemple, Tag, Tree, Page, Badge}
+    methods: {
+      refresh () {
+        console.log(1)
+        this.$router.go(0)
+      }
+    },
+    components: {TableTemple, Tag, Tree, Page, Badge, Progress}
   }
 </script>
 

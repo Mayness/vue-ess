@@ -18,7 +18,9 @@
               :closable="!item.close"
             >
               <transition name="el-fade-in-linear">
-                <router-view  v-show="true"/>
+                <keep-alive>
+                  <router-view  v-show="true"/>
+                </keep-alive>
               </transition>
             </el-tab-pane>
           </el-tabs>
@@ -52,10 +54,10 @@
       // 进入页面默认跳入active选项卡路径
       await this.sleep_getActiveTab()
       this.$router.push(this.activeTab.path)
-      console.log('请求结果：')
-      this.$http.get('/api/auth/login_old').then((res) => {
-        console.log(res)
-      })
+      // console.log('请求结果：')
+      // this.$http.get('/api/auth/login_old').then((res) => {
+      //   console.log(res)
+      // })
     },
     methods: {
       // 防止内容栏高度溢出

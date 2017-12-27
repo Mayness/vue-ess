@@ -10,14 +10,14 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api/auth': {                      // 相当于 {target}/api/v1
-        target: 'http://172.16.101.81',   // 接口域名
-        secure: true,                    // 是否跨域 
-        changeOrigin: false               // 如果是https接口，需要配置这个参数
-        // ,pathRewriter: {
-        //   '/api': '/api'               // 可以使用 /api 等价于 {target}/api
-        // }
-      }
+      // '/api/auth': {                      // 相当于 {target}/api/v1
+      //   target: 'http://172.16.101.81',   // 接口域名
+      //   secure: true,                    // 是否跨域 
+      //   changeOrigin: false               // 如果是https接口，需要配置这个参数
+      //   // ,pathRewriter: {
+      //   //   '/api': '/api'               // 可以使用 /api 等价于 {target}/api
+      //   // }
+      // }
     },
 
     // Various Dev Server settings

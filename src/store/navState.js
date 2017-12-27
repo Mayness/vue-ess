@@ -49,7 +49,7 @@ const mutations = {
     let tabs = state.editableTabs
     let activeName = state.editableTabsValue.str
     state.activeTab.path = state.activeTab.path || state.editableTabs[0].path
-    // 如果当前删除的选项卡 是 当前展示的这个选项卡
+    // 判断 当前删除的选项卡 是 当前展示的这个选项卡
     if (activeName === targetName) {
       tabs.forEach((tab, index) => {
         // 找到当前这个选项卡

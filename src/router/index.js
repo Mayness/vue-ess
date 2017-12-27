@@ -5,6 +5,7 @@ import children from './childRouter'
 Vue.use(Router)
 
 const router = new Router({
+  base: __dirname,
   routes: [
     {
       path: '/',
@@ -12,9 +13,12 @@ const router = new Router({
       // name: 'Index',
       component: Index,
       children
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
-  ],
-  mode: 'history'
+  ]
 })
 // router.afterEach((to, from, next) => {
 //   console.log(to, from)
