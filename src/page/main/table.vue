@@ -25,7 +25,6 @@
     },
     methods: {
       refresh () {
-        console.log(1)
         this.$router.go(0)
       }
     },

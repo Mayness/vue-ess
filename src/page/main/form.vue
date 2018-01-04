@@ -31,11 +31,15 @@
   import Computed from '@/components/form/computed'
   import CheckBox from '@/components/form/checkbox'
   import SingleSelect from '@/components/form/singleSelect'
+  import { mapState } from 'vuex'
   export default {
     data () {
       return {
         num: {val: 10}
       }
+    },
+    computed: {
+      ...mapState(['view_loading'])
     },
     components: {
       Cascader,

@@ -18,6 +18,11 @@ module.exports = {
       //   //   '/api': '/api'               // 可以使用 /api 等价于 {target}/api
       //   // }
       // }
+      '/api/v1': {
+        target: 'https://cnodejs.org',
+        secure: false,
+        changeOrigin: false
+      }
     },
 
     // Various Dev Server settings

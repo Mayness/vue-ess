@@ -18,8 +18,9 @@
               :closable="!item.close"
             >
               <transition name="el-fade-in-linear">
-                <keep-alive>
-                  <router-view  v-show="true"/>
+                <!-- 除了文章详情页面不缓存 -->
+                <keep-alive exclude="top_detail, top_article">
+                  <router-view v-loading="view_loading"  v-show="true"/>
                 </keep-alive>
               </transition>
             </el-tab-pane>
@@ -36,14 +37,11 @@
   // 头部
   import indexHeader from '@/components/index/header'
   // 顶部导航栏状态
-  import store from '@/store/navState'
-  import { mapState } from 'vuex'
+  import store from '@/store'
+  import { mapState, mapGetters } from 'vuex'
   export default {
     name: 'index',
-    // 必须要用store名字
-    data () {
-      return {}
-    },
+    // 必须要用store这个名字
     store,
     async mounted () {
       // 内容栏防止高度溢出
@@ -53,11 +51,7 @@
       })
       // 进入页面默认跳入active选项卡路径
       await this.sleep_getActiveTab()
-      this.$router.push(this.activeTab.path)
-      // console.log('请求结果：')
-      // this.$http.get('/api/auth/login_old').then((res) => {
-      //   console.log(res)
-      // })
+      this.$router.push(`/${this.activeTab.path}`)
     },
     methods: {
       // 防止内容栏高度溢出
@@ -69,12 +63,15 @@
       // 移除选项卡
       removeTab (targetName) {
         store.commit('changeTab', targetName)
-        this.$router.push(this.activeTab.path)
+        this.$router.push(`/${this.activeTab.path}`)
       },
       clickTab (target) {
         for (let i of this.editableTabs) {
           if (i.name === target.name) {
-            this.$router.push(i.path)
+            /* push直接一个地址时，加上 / 代表更目录
+            /  若不加则表示相对当前地址
+            */
+            this.$router.push(`/${i.path}`)
           }
         }
       },
@@ -91,7 +88,14 @@
       // }
     },
     computed: {
-      ...mapState(['editableTabsValue', 'editableTabs', 'activeTab', 'sideNavWidth'])
+      ...mapState(['editableTabsValue', 'editableTabs', 'activeTab', 'sideNavWidth', 'view_loading']),
+      ...mapGetters(['test_navLength'])
+    },
+    beforeRouteUpdate (to, from, next) {
+      next()
+      this.$nextTick(() => {
+        $('.el-tabs__content').scrollTop(0)
+      })
     },
     components: {sideNav, indexHeader}
   }
@@ -108,4 +112,7 @@
 .el-main{
   padding: 5px;
 }
-</style>
+.el-aside{
+  transition: width 0.2s linear;
+}
+</style> 

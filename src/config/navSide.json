@@ -36,4 +36,15 @@
       "path": "other"
     }
   ]
+}, {
+  "menuName": "导航四",
+  "icon": "el-icon-tickets",
+  "pathId": "4",
+  "menuArray": [
+    {
+      "name": "文章",
+      "id": "top_article",
+      "path": "article"
+    }
+  ]
 }]

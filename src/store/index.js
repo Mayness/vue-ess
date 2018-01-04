@@ -1,19 +1,23 @@
 // 侧边栏状态管理 和 顶部导航栏管理
 import Vue from 'vue'
 import Vuex from 'vuex'
+import utils from '../utils/util'
 Vue.use(Vuex)
+
 // 数据状态
 const state = {
   // 当前展示的选项卡
   editableTabsValue: {str: 'top_index'},
   editableTabs: [{
     title: '首页',          // tab栏标题
-    name: 'top_index',           // tab栏类似id
+    name: 'top_index',      // tab栏类似id
     path: '/',              // tab 路径
     close: true             // 是否允许关闭
   }],
   activeTab: {path: null},
-  sideNavWidth: '200px'
+  sideNavWidth: '200px',
+  // 页面加载动画
+  view_loading: false
 }
 // 修改数据状态
 const mutations = {
@@ -23,6 +27,10 @@ const mutations = {
       let sameTabId = null
       for (let i of state.editableTabs) {
         if (i.name === value.id) {
+          // 在文章详情页面，只改变navTab名称，不增加新的选项卡
+          if (i.name === 'top_detail') {
+            i.title = value.name
+          }
           sameTabId = i.name
           break
         }
@@ -69,9 +77,48 @@ const mutations = {
   // 侧边栏是否收缩
   changeContentWidth (state, coll) {
     state.sideNavWidth = coll ? '70px' : '200px'
+  },
+  // 改变loading状态
+  change_loading (state, judge) {
+    state.view_loading = judge
+  },
+  // 添加对象
+  addObjTest (state, obj) {
+    Vue.set(state, obj.key, obj.value)
+    // 第二种设置方法
+    // state = {...state, [obj.key]: obj.value}
+  }
+}
+// 派生测试
+const getters = {
+  test_navLength () {
+    return state.editableTabs.length
+  }
+}
+// 异步处理
+const actions = {
+  async addObjTestAsync ({ commit, dispatch }, obj) {
+    await dispatch('waitRequest')
+    console.log('读取成功！')
+    setTimeout(() => {
+      commit('addObjTest', obj)
+      console.log('设置完成！')
+    }
+    , 300)
+  },
+  waitRequest () {
+    return new Promise(async resolve => {
+      for (let i = 1; i <= 10; i++) {
+        await utils.sleep(1000)
+        console.log(`读取中${i}0%`)
+      }
+      resolve()
+    })
   }
 }
 export default new Vuex.Store({
   state,
-  mutations
+  mutations,
+  getters,
+  actions
 })

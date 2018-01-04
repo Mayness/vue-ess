@@ -5,6 +5,8 @@ const TableTemple = resolve => require(['@/page/main/table'], resolve)
 const Notice = resolve => require(['@/page/main/notice'], resolve)
 const Navigation = resolve => require(['@/page/main/navigation'], resolve)
 const Other = resolve => require(['@/page/main/other'], resolve)
+const Article = resolve => require(['@/page/main/article'], resolve)
+const Detail = resolve => require(['@/components/article/news_detail'], resolve)
 export default [
   {
     path: '',
@@ -38,5 +40,15 @@ export default [
     meta: {
       require: true
     }
+  },
+  {
+    path: 'article',
+    name: 'top_article',
+    component: Article
+  },
+  {
+    path: 'article/:id',
+    name: 'top_detail',
+    component: Detail
   }
 ]

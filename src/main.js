@@ -8,10 +8,12 @@ import router from './router'
 import ElementUI from 'element-ui'
 import '../static/js/jquery-1.7.2.min.js'
 import 'element-ui/lib/theme-chalk/index.css'
+import utils from '@/utils/util'
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 Vue.prototype.$http = Axios
+Vue.prototype.$utils = utils
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -22,3 +22,13 @@
 .contentBox_Content{
   margin: 10px 0 30px;
 }
+// 读取到的新闻页面
+.news_detail{
+  padding: 5px 10px;
+  font-size: 16px;
+  & img{
+    display: block;
+    max-width: 90%;
+    margin: 20px 0;
+  }
+}

@@ -17,7 +17,8 @@
           <i :class="item.icon"></i>
           <span slot="title">{{item.menuName}}</span>
         </template>
-        <el-menu-item v-for="(menuItem, menuIdx) of item.menuArray" :key="menuIdx" :index="menuItem.path">{{menuItem.name}}</el-menu-item>
+        <!-- index必须是以根目录为准，防止有二级栏目干扰，因此要添上 '/' -->
+        <el-menu-item v-for="(menuItem, menuIdx) of item.menuArray" :key="menuIdx" :index="'/' +menuItem.path">{{menuItem.name}}</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
@@ -27,7 +28,9 @@
 <style scope lang='scss'>
   @import '../../style/base/color';
   @import '../../asserts/icon/iconfont.css';
-
+  .el-menu--collapse{
+    position: absolute !important;
+  }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     position: absolute;
     width: 200px;
@@ -64,7 +67,7 @@
 </style>
 
 <script>
-  import store from '@/store/navState'
+  import store from '@/store'
   import sideNav from '@/config/navSide.json'
   export default {
     data () {
@@ -79,11 +82,6 @@
     mounted () {
       this.init_navArray()
     },
-    watch: {
-      isCollapse (judg) {
-        store.commit('changeContentWidth', judg)
-      }
-    },
     methods: {
       // 获得只有导航的侧边栏数组信息
       init_navArray () {
@@ -95,13 +93,14 @@
       },
       handleSelect (key) {
         for (let i of this.side_navArray) {
-          if (i.path === key) {
+          if (`/${i.path}` === key) {
             store.commit('addNavTab', i)
           }
         }
       },
       collapse () {
         this.isCollapse = !this.isCollapse
+        store.commit('changeContentWidth', this.isCollapse)
       }
     },
     store
