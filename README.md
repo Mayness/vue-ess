@@ -16,6 +16,7 @@ npm run build
 ```
 
 ## 开发工具系统
+``` bash
 Vue.js          项目核心
 Vuex            Vue状态管理工具，用于组件数据之间的交互
 Vue-cli         Vue 项目脚手架。一键安装 vue 全家桶的工具。
@@ -25,6 +26,7 @@ npm             前端包管理器。
 axios           ajax接口请求工具。
 elementui       基于 vue 的后台组件库。
 Sass            可编译成css 文件
+```
 
 ## 项目结构
 ``` bash
