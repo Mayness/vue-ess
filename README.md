@@ -27,6 +27,7 @@ elementui       基于 vue 的后台组件库。
 Sass            可编译成css 文件
 
 ## 项目结构
+``` bash
 |-- build                 编译配置文件
 	|-- build.js		    打包主要运行文件
 	|-- check-versions.js    检测node和npm版本
@@ -80,3 +81,4 @@ Sass            可编译成css 文件
 |-- package-lock.json			指定依赖项中的版本，优化性能
 |-- package.json				项目依赖包配置文件
 |-- README.md				项目说明文档
+```
