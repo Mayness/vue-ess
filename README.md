@@ -13,6 +13,7 @@ npm run dev
 
 # 生产环境文件生成
 npm run build
+```
 
 ## 开发工具系统
 Vue.js          项目核心
