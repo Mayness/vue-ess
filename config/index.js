@@ -3,7 +3,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
 module.exports = {
   dev: {
     // Paths
@@ -20,8 +19,8 @@ module.exports = {
       // }
       '/api/v1': {
         target: 'https://cnodejs.org',
-        secure: false,
-        changeOrigin: false
+        secure: true,
+        changeOrigin: true
       }
     },
 
@@ -74,7 +73,6 @@ module.exports = {
     assetsSubDirectory: 'static',
     // 静态资源的公开路径：资源的根目录
     assetsPublicPath: '/',
-
     /**
      * Source Maps
      */

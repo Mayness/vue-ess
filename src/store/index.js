@@ -16,8 +16,12 @@ const state = {
   }],
   activeTab: {path: null},
   sideNavWidth: '200px',
-  // 页面加载动画
-  view_loading: false
+  // 当前页面加载的新闻id
+  news_id: null,
+  // 需要更新的页面
+  notAlivePage: 'top_detail',
+  // 记录文章列表滚动条距离顶部距离
+  scroll_top: 0
 }
 // 修改数据状态
 const mutations = {
@@ -78,6 +82,16 @@ const mutations = {
   changeContentWidth (state, coll) {
     state.sideNavWidth = coll ? '70px' : '200px'
   },
+  // 更新当前新闻id的值
+  change_newsId (state, id) {
+    // 判断第二次打开的详情页面是否是之前的页面
+    if (state.news_id !== id) {
+      state.notAlivePage = 'top_detail'
+      state.news_id = id
+    } else {
+      state.notAlivePage = 'top_detail'
+    }
+  },
   // 改变loading状态
   change_loading (state, judge) {
     state.view_loading = judge
@@ -87,6 +101,9 @@ const mutations = {
     Vue.set(state, obj.key, obj.value)
     // 第二种设置方法
     // state = {...state, [obj.key]: obj.value}
+  },
+  change_scrollData (state, scrollTop) {
+    state.scroll_top = scrollTop
   }
 }
 // 派生测试

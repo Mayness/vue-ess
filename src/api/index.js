@@ -1,6 +1,6 @@
 // 接口调用工具
 // 配置API接口地址
-var root = '/api'
+var root = 'api/v1'
 // 引用axios
 var axios = require('axios')
 // 自定义判断元素类型JS
@@ -25,10 +25,8 @@ function filterNull (o) {
 }
 /*
   接口处理函数
-  这个函数每个项目都是不一样的，我现在调整的是适用于
-  https://cnodejs.org/api/v1 的接口，
-  主要是，不同的接口的成功标识和失败提示是不一致的。
-  另外，不同的项目的处理方法也是不一致的，这里出错就是简单的alert
+  api参考
+  http://apizza.cc/console/project/f650fa55862c4d378c19e27e0c5f42d9/browse?api=7e189974d83642869f54a6bc4f8e5c83
 */
 
 function apiAxios (method, url, params, success, failure) {
@@ -48,18 +46,12 @@ function apiAxios (method, url, params, success, failure) {
       if (success) {
         success(res.data)
       }
-    } else {
-      if (failure) {
-        failure(res.data)
-      } else {
-        window.alert('error: ' + JSON.stringify(res.data))
-      }
     }
   })
   .catch(function (err) {
     let res = err.response
     if (err) {
-      window.alert('api error, HTTP CODE: ' + res.status)
+      failure(res.status)
     }
   })
 }

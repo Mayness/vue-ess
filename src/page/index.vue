@@ -19,7 +19,7 @@
             >
               <transition name="el-fade-in-linear">
                 <!-- 除了文章详情页面不缓存 -->
-                <keep-alive exclude="top_detail, top_article">
+                <keep-alive :exclude="notAlivePage">
                   <router-view v-loading="view_loading"  v-show="true"/>
                 </keep-alive>
               </transition>
@@ -88,8 +88,13 @@
       // }
     },
     computed: {
-      ...mapState(['editableTabsValue', 'editableTabs', 'activeTab', 'sideNavWidth', 'view_loading']),
+      ...mapState(['editableTabsValue', 'editableTabs', 'activeTab', 'sideNavWidth', 'view_loading', 'notAlivePage']),
       ...mapGetters(['test_navLength'])
+    },
+    watch: {
+      notAlivePage (a) {
+        console.log(`${a}需要更新`)
+      }
     },
     beforeRouteUpdate (to, from, next) {
       next()
