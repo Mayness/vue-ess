@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="contentBox_title" @click="refresh()">表格test</h2>
+    <h2 class="contentBox_title" @click="refresh()">表格</h2>
     <div class="contentBox_item">
       <TableTemple/>
       <Tag/>
