@@ -9,7 +9,7 @@
           <side-nav/>
         </el-aside>
         <el-main>
-          <el-tabs v-if="editableTabsValue.str" v-model="editableTabsValue.str" type="card" @tab-remove="removeTab" @tab-click="clickTab">
+          <el-tabs v-if="editableTabsValue.name" v-model="editableTabsValue.name" type="card" @tab-remove="removeTab" @tab-click="clickTab">
             <el-tab-pane
               v-for="(item, index) in editableTabs"
               :key="index"
@@ -51,7 +51,7 @@
       })
       // 进入页面默认跳入active选项卡路径
       await this.sleep_getActiveTab()
-      this.$router.push(`/${this.activeTab.path}`)
+      this.$router.push(`/${this.editableTabsValue.path}`)
     },
     methods: {
       // 防止内容栏高度溢出
@@ -63,7 +63,7 @@
       // 移除选项卡
       removeTab (targetName) {
         store.commit('changeTab', targetName)
-        this.$router.push(`/${this.activeTab.path}`)
+        this.$router.push(`/${this.editableTabsValue.path}`)
       },
       clickTab (target) {
         for (let i of this.editableTabs) {
@@ -71,6 +71,7 @@
             /* push直接一个地址时，加上 / 代表更目录
             /  若不加则表示相对当前地址
             */
+            store.commit('clickTabChange', i.path)
             this.$router.push(`/${i.path}`)
           }
         }
@@ -88,7 +89,7 @@
       // }
     },
     computed: {
-      ...mapState(['editableTabsValue', 'editableTabs', 'activeTab', 'sideNavWidth', 'view_loading', 'notAlivePage']),
+      ...mapState(['editableTabsValue', 'editableTabs', 'sideNavWidth', 'view_loading', 'notAlivePage']),
       ...mapGetters(['test_navLength'])
     },
     watch: {

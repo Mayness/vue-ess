@@ -6,15 +6,14 @@ Vue.use(Vuex)
 
 // 数据状态
 const state = {
-  // 当前展示的选项卡
-  editableTabsValue: {str: 'top_index'},
+  // 当前展示选项卡的信息
+  editableTabsValue: {name: 'top_index', path: null},
   editableTabs: [{
     title: '首页',          // tab栏标题
     name: 'top_index',      // tab栏类似id
     path: '/',              // tab 路径
     close: true             // 是否允许关闭
   }],
-  activeTab: {path: null},
   sideNavWidth: '200px',
   // 当前页面加载的新闻id
   news_id: null,
@@ -49,18 +48,18 @@ const mutations = {
           name: value.id,
           path: value.path
         })
-        state.editableTabsValue.str = value.id
+        state.editableTabsValue.name = value.id
       } else {
-        state.editableTabsValue.str = id
+        state.editableTabsValue.name = id
       }
-      state.activeTab.path = value.path
+      state.editableTabsValue.path = value.path
     })
   },
   // 修改当前tab
   changeTab (state, targetName) {
     let tabs = state.editableTabs
-    let activeName = state.editableTabsValue.str
-    state.activeTab.path = state.activeTab.path || state.editableTabs[0].path
+    let activeName = state.editableTabsValue.name
+    state.editableTabsValue.path = state.editableTabsValue.path || state.editableTabs[0].path
     // 判断 当前删除的选项卡 是 当前展示的这个选项卡
     if (activeName === targetName) {
       tabs.forEach((tab, index) => {
@@ -69,14 +68,18 @@ const mutations = {
           let nextTab = tabs[index + 1] || tabs[index - 1]
           if (nextTab) {
             activeName = nextTab.name
-            state.activeTab.path = nextTab.path
+            state.editableTabsValue.path = nextTab.path
           }
         }
       })
     }
-    state.editableTabsValue.str = activeName
+    state.editableTabsValue.name = activeName
     // 删除选项组中的元素
     state.editableTabs = tabs.filter(tab => tab.name !== targetName)
+  },
+  // 点击头部导航栏改变active Path   没有模板，所以需要手动绑定
+  clickTabChange (state, target) {
+    state.editableTabsValue.path = target
   },
   // 侧边栏是否收缩
   changeContentWidth (state, coll) {
