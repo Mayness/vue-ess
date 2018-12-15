@@ -9,7 +9,7 @@
 npm install
 
 # 开发环境  localhost:8888
-npm run dev
+
 
 # 生产环境文件生成
 npm run build
